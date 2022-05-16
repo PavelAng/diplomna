@@ -5,6 +5,8 @@ const OrderDetail = ({ total, createOrder }) => {
   const [customer, setCustomer] = useState("");
   const [address, setAddress] = useState("");
 
+  // TODO const [formData, setFormData] = useState({});
+
   const handleClick = () => {
     createOrder({ customer, address, total, method: 0 });
   };
@@ -27,7 +29,8 @@ const OrderDetail = ({ total, createOrder }) => {
           <input
             type="text"
             placeholder="+359 876 666 666"
-            className={styles.input}
+            className={OrderDetail.input}
+            // onChange={(e) => }
           />
         </div>
         <div className={styles.item}>

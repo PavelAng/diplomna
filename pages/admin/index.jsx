@@ -20,17 +20,13 @@ const Index = ({ orders, products }) => {
       console.log(err);
     }
 
-    try{
-      const res = await axios.delete(
-        "http://localhost:3000/api/orders/" + id
-      );
+    try {
+      const res = await axios.delete("http://localhost:3000/api/orders/" + id);
       setOrderList(orderList.filter((order) => order._id !== id));
-    }catch (err){
+    } catch (err) {
       console.log(err);
     }
   };
-
-  
 
   const handleStatus = async (id) => {
     const item = orderList.filter((order) => order._id === id)[0];
@@ -116,8 +112,10 @@ const Index = ({ orders, products }) => {
               <tr className={styles.trTitle}>
                 <td>{order._id.slice(0, 100)}...</td>
                 <td>{order.customer}</td>
-                <td>{order.Title}</td>
+                <td>{order.products}</td>
+                <td>{order.phonenumber}</td>
                 <td>${order.total}</td>
+                {console.log(order.product)}
                 <td>
                   {order.method === 0 ? <span>cash</span> : <span>paid</span>}
                 </td>
@@ -128,16 +126,13 @@ const Index = ({ orders, products }) => {
                   <button onClick={() => handleStatus(order._id)}>
                     Next Stage
                   </button>
-                  <button
-                    onClick={() => handleDelete(order._id)}>
+                  <button onClick={() => handleDelete(order._id)}>
                     Delete
-                  </button>    
+                  </button>
                 </td>
               </tr>
             </tbody>
           ))}
-
-          
         </table>
       </div>
     </div>

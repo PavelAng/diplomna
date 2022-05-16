@@ -16,7 +16,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
   const [cash, setCash] = useState(false);
-  const [new_data1, setData1] = useState(null)
+  const [new_data1, setData1] = useState(null);
   const amount = cart.total;
   const currency = "USD";
   const style = { layout: "vertical" };
@@ -30,6 +30,7 @@ const Cart = () => {
       setData1(new_Data);
       console.log(new_data1);
       const res = await axios.post("http://localhost:3000/api/orders", data);
+      console.log(data);
       if (res.status === 201) {
         dispatch(reset());
         router.push(`/orders/${res.data._id}`);
@@ -86,6 +87,8 @@ const Cart = () => {
               createOrder({
                 customer: shipping.name.full_name,
                 address: shipping.address.address_line_1,
+                products: [...cart.products],
+                // TODO IVESTIGATE
                 total: cart.total,
                 method: 1,
               });
